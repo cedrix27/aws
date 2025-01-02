@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Modules from "./components/Modules"; // Page Modules
+import Dashboard from "./components/Dashboard"; // Exemple pour Dashboard
+import AlertNotifications from "./components/AlertNotifiactions";
+import CamerasAlarmes from "./components/CamerasAlarmes";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Layout avec barre latérale et barre supérieure */}
+        <Route path="/" element={<Layout />}>
+          {/* Routes enfants */}
+          <Route index element={<Dashboard />} /> {/* Par défaut, Dashboard */}
+          <Route path="modules" element={<Modules />} />
+           {/* Page Modules */}
+          <Route path="notifications-alertes" element={<AlertNotifications />} />
+
+          <Route path="cameras-alarmes" element={<CamerasAlarmes />} />
+
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
